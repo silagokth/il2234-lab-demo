@@ -17,7 +17,7 @@ The installation PATH of Vivado is specified during the installation process:
 Deppending on your OS do the following
 #### Linux & MacOS
 Add the path in your bashrc/zshrc or equivalent file. For example:
-```
+```bash
 export PATH=${PATH}:/home/jordi/toolsXilinx/Vivado/2024.i/bin
 ```
 Make sure to add `bin` at the end of the path
@@ -28,7 +28,7 @@ Add the Vivado path in the PATH variable for your user
 ## Starting Vivado and recreating the project
 To follow the lab you will recreate a project template provided in this git repository. To do that clone the git repository in the repository of your choice and run the `rebuild.tcl` script with Vivado.
 
-```
+```bash
 git clone git@github.com:silagokth/il2234-lab-demo.git lab1
 cd lab1
 vivado -source rebuild.tcl
@@ -45,7 +45,7 @@ The constraints file `urbana.xdc` includes , among others, the definitions of th
 For our first design we will connect a switch to a LED.
 ### Adding module ports
 For Vivado to be able to connect our design to the desired FPGA pins, we need to specifie the *exct* name in the port list as found in the constraints file. Note that names with `[xx]` are arrays and have to be listed as such. For example to add the LEDs we should add the following in `urbana_top.sv`:
-```
+```systemverilog
 module urbana_top (
    output logic LED[15:0]
    );
@@ -55,7 +55,7 @@ What should we do to add the switches? Hint: look at the constraints file and th
 ### Connecting things together
 
 Lets say we want to connect switch 9 with LED 4. To do that we can use an `assign` statement in our top module RTLas follows:
-```
+```systemverilog
 module urbana_top (
     output logic LED[15:0],
     input  logic SW[15:0]
@@ -88,7 +88,7 @@ Another typical starter example is to make an LED blink. If you have worked with
 The common way to generate this type of signals is to use a clock divider. We will use the input 100 MHz clock of the FPGA and divide it down to 1 Hz. For that we will create a clock divider module and we will later connect that to the LED.
 
 A simple way to divide the clock is to implement a counter.
-```
+```systemverilog
 module clock_divider #(
     parameter int DIVIDER
     ) (
@@ -115,7 +115,7 @@ endmodule
 ```
 
 Now we can connect the counter to a LED and divide by 100000000.
-```
+```systemverilog
 module urbana_top (
     output logic LED[15:0],
     input  logic BTN[3:0],
@@ -143,7 +143,7 @@ The reason is because the digits of the display are *multiplexed*. This means th
 
 To start with a simpler task we will start by displaying a single digit. First we need to convert the digit input (encode in BCD) into the individual segment outputs. For that we will use a lookup table.
 
-```
+```systemverilog
 module bcd27s (
     input  logic [3:0] bcd,
     output logic [6:0] seg
@@ -169,7 +169,7 @@ endmodule
 
 Now we will connect 4 switches as our input digit, and the output of the 7s converter to the 7s displays. What do we need to add as the input/output ports of our top level?
 
-```
+```systemverilog
 module urbana_top (
     output logic SW[15:0],
     // 7 segment digits output port
