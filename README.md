@@ -192,46 +192,4 @@ Repeat the steps and program the synthesized bitstream.
 ## Multiplexing the displays
 To drive the 4 7 sgment digits we will have to multiplex them at a frequency that is fast enough for our eye to perceibe it as continiously on, we will use 1 kHz. This means that we need to again divide down the 100 MHz clock signal as we did before. Then we will have to switch digit at every 1 kHz clock tick.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+![img](img/multiplexed.svg)
