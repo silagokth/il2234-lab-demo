@@ -188,13 +188,13 @@ module urbana_top (
     // 7 segment digit selector output port
     );
 
-    # instantiate the bcd27s converter
+    // instantiate the bcd27s converter
     bcd27s bcd27s_inst (
         .bcd(SW[3:0]),
         .seg(D0_SEG)
     );
 
-    # Select which digit we want (note, they are active low!!)
+    // Select which digit we want (note, they are active low!!)
     assign D0_AN = 4'b1011; // Digit 3 is activated
 endmodule
 ```
