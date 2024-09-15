@@ -4,7 +4,7 @@ In this lab, you will learn the basics of Vivado, the Xilinx FPGA development to
 ## Instalation
 Follow the instructions found on [the AMD website](https://www.xilinx.com/support/download.html). You will need to register to download the software.
 
-When installing make sure you choose Vivado, then ML Standard edition, and enable the support for Spartan 7-series FPGA devices.
+When installing, make sure you choose Vivado and then the ML Standard edition, and enable support for Spartan 7-series FPGA devices.
 ![img](img/vivado_installation.png)
 
 
