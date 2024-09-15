@@ -1,32 +1,33 @@
 # Introduction to Vivado
-In this lab you will learn the basics of Vivado, the Xilinx FPGA development tool that we will use in the IL2234 course.
+In this lab, you will learn the basics of Vivado, the Xilinx FPGA development tool that we will use in the IL2234 course.
 
 ## Instalation
-Follow the instructions found in [AMD website](https://www.xilinx.com/support/download.html). You will need to register to download the software.
+Follow the instructions found on [the AMD website](https://www.xilinx.com/support/download.html). You will need to register to download the software.
 
 When installing make sure you choose Vivado, then ML Standard edition, and enable the support for Spartan 7-series FPGA devices.
 ![img](img/vivado_installation.png)
 
 
 ### Adding Vivado to PATH
-To run vivado commands from the command line interface we need to add Vivado installation folder to the PATH environment variables.
+To run Vivado commands from the command line interface, we need to add the Vivado installation folder to the PATH environment variables.
 
 The installation PATH of Vivado is specified during the installation process:
 ![img](img/vivado_path.png)
 
-Deppending on your OS do the following
+Depending on your OS, do the following
 #### Linux & MacOS
 Add the path in your bashrc/zshrc or equivalent file. For example:
 ```bash
 export PATH=${PATH}:/home/jordi/toolsXilinx/Vivado/2024.i/bin
 ```
 Make sure to add `bin` at the end of the path
+NOTE: jordi is an example here. Add your installation path.
 #### Windows
 Search "environmental variables" in the start menu
 Add the Vivado path in the PATH variable for your user
 
 ## Starting Vivado and recreating the project
-To follow the lab you will recreate a project template provided in this git repository. To do that clone the git repository in the repository of your choice and run the `rebuild.tcl` script with Vivado.
+To follow the lab, you will recreate a project template provided in this git repository. To do that clone the git repository in the repository of your choice and run the `rebuild.tcl` script with Vivado.
 
 ```bash
 git clone git@github.com:silagokth/il2234-lab-demo.git lab1
@@ -71,15 +72,15 @@ To transform our RTL code into a gate-level version of it we have to run logic s
 Does the schematic match our expected design?
 
 ### Loading the design in the FPGA
-To load the design into the FPGA we first need to run the Implementation. This will map each gate on our synthesized schematic to a specific logic element of the FPGA and connect everything together using the routing resources. 
+To load the design into the FPGA, we first need to run the Implementation. This will map each gate on our synthesized schematic to a specific logic element of the FPGA and connect everything together using the routing resources. 
 
-After implementation proces finishes, we have to generate the *bitstream*. This contains the information that will be sent to the FPGA which contains all the connections and settings that need to be made inside the FPGA to correctly implement our design.
+After the implementation process finishes, we have to generate the *bitstream*. This contains the information that will be sent to the FPGA, which contains all the connections and settings that need to be made inside the FPGA to correctly implement our design.
 
-After the bitstream has been generated we can connect to the FPGA and program it.. Under PROGRAM AND DEBUG, click *Open Target*. This should connect to the FPGA. If this does not happen make sure the FPGA is turned on, and check if your [drivers are installed correctly](https://docs.amd.com/r/en-US/ug973-vivado-release-notes-install-license/Install-Cable-Drivers)
+After the bitstream has been generated we can connect to the FPGA and program it.. Under PROGRAM AND DEBUG, click *Open Target*. This should connect to the FPGA. If this does not happen, make sure the FPGA is turned on, and check if your [drivers are installed correctly](https://docs.amd.com/r/en-US/ug973-vivado-release-notes-install-license/Install-Cable-Drivers)
 ![img](img/open_target.png)
 After the hardware is detected, you can click Program Device and upload the bitstream.
 
-Now your FPGA should have implemented the design that we implemented in RTL. Try if the switch makes the LED turn on.
+Now your FPGA should have implemented the design that we implemented in RTL. Try if the switch turns the LED on.
 
 ## LED blinking
 Another typical starter example is to make an LED blink. If you have worked with microcontrollers before (for example arduino) you might think that this is something very easy to do, turn the led on, wait, turn it off, wait, repeat. However an FPGA is not a processor that executes instructions, and thus if we want to make the blink the LED, we have to generate a signal that "blinks" (switches) at the desired frequency.
@@ -135,11 +136,11 @@ endmodule
 Repeat the steps from before to synthesize and program the FPGA. 
 
 ## 7 segment displays
-The Urbana board includes 2 4-digigt 7-segment displays. To understand how the displays are connected to the FPGA, take a look at the schematic and the [7 segment module datasheet](http://www.lucky-light.com/LED%20Displays/Four%20Digit%20Display/KW4-281.pdf).
+The Urbana board includes 2 4-digit 7-segment displays. To understand how the displays are connected to the FPGA, take a look at the schematic and the [7 segment module datasheet](http://www.lucky-light.com/LED%20Displays/Four%20Digit%20Display/KW4-281.pdf).
 
-You might ask yourself, each module has 4 digits with 7 segments each. That is a a total of 8 connections per digit (including the dot) times 4 digits, 32 connections. However the KW4-281 module only has 12 pins.
+You might ask yourself, each module has 4 digits with 7 segments each. That is a total of 8 connections per digit (including the dot) times 4 digits, 32 connections. However the KW4-281 module only has 12 pins.
 
-The reason is because the digits of the display are *multiplexed*. This means that the module takes 1 digit input and a 4 bit (one hot encoded) digit select signals, and display the input number on the selected digit. To display 4 digits simultaniously we have to *multiplex* (i.e. switch very fast) between the digits at a frequency that our eye cannot perceibe.
+The reason is that the digits of the display are *multiplexed*. This means that the module takes 1-digit input and a 4-bit (one hot encoded) digit select signal and displays the input number on the selected digit. To display 4 digits simultaneously, we have to *multiplex* (i.e., switch very fast) between the digits at a frequency that our eye cannot perceive.
 
 To start with a simpler task we will start by displaying a single digit. First we need to convert the digit input (encode in BCD) into the individual segment outputs. For that we will use a lookup table.
 
@@ -190,6 +191,6 @@ endmodule
 Repeat the steps and program the synthesized bitstream.
 
 ## Multiplexing the displays
-To drive the 4 7 sgment digits we will have to multiplex them at a frequency that is fast enough for our eye to perceibe it as continiously on, we will use 1 kHz. This means that we need to again divide down the 100 MHz clock signal as we did before. Then we will have to switch digit at every 1 kHz clock tick.
+To drive the 4 7 segment digits, we will have to multiplex them at a frequency that is fast enough for our eye to perceive it as continuously on; we will use 1 kHz. This means that we need to again divide down the 100 MHz clock signal as we did before. Then, we will have to switch digits at every 1 kHz clock tick.
 
 ![img](img/multiplexed.png)
