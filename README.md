@@ -20,7 +20,8 @@ Add the path in your bashrc/zshrc or equivalent file. For example:
 ```bash
 export PATH=${PATH}:/home/jordi/toolsXilinx/Vivado/2024.i/bin
 ```
-Make sure to add `bin` at the end of the path
+Make sure to add `bin` at the end of the path.
+
 NOTE: jordi is an example here. Add your installation path.
 #### Windows
 Search "environmental variables" in the start menu
