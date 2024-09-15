@@ -50,7 +50,7 @@ For our first design, we will connect a switch to a LED.
 For Vivado to be able to connect our design to the desired FPGA pins, we need to specify the *exact* name in the port list as found in the constraints file. Note that names with `[xx]` are arrays and have to be listed as such. For example, to add the LEDs, we should add the following in `urbana_top.sv`:
 ```systemverilog
 module urbana_top (
-   output logic LED[15:0]
+   output logic [15:0]LED
    );
 ```
 What should we do to add the switches? Hint: look at the constraints file and the schematic to find out the names
@@ -60,8 +60,8 @@ What should we do to add the switches? Hint: look at the constraints file and th
 Let's say we want to connect switch 9 with LED 4. To do that, we can use an `assign` statement in our top module RTL as follows:
 ```systemverilog
 module urbana_top (
-    output logic LED[15:0],
-    input  logic SW[15:0]
+    output logic [15:0]LED,
+    input  logic [15:0]SW
     );
 
     assign LED[4] = SW[9];
@@ -120,8 +120,8 @@ endmodule
 Now we can connect the counter to an LED and divide by 100000000.
 ```systemverilog
 module urbana_top (
-    output logic LED[15:0],
-    input  logic BTN[3:0],
+    output logic [15:0]LED,
+    input  logic [3:0]BTN,
     input  logic CLK_100MHZ
     );
 
@@ -174,7 +174,7 @@ Now we will connect four switches as our input digit and the output of the 7s co
 
 ```systemverilog
 module urbana_top (
-    output logic SW[15:0],
+    output logic [15:0]SW,
     // 7 segment digits output port
     // 7 segment digit selector output port
     );
