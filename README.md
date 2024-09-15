@@ -70,6 +70,7 @@ endmodule
 
 ### Synthesizing the design
 To transform our RTL code into a gate-level version, we have to run logic synthesis. Click the green triangle in the left menu, "Run Synthesis." After the synthesis is finished, we can view the resulting schematic by pressing the "Schematic" button.
+![img](img/vivado_synthesis.png)
 
 Does the schematic match our expected design?
 
@@ -80,7 +81,10 @@ After the implementation process finishes, we must generate the *bitstream*. Thi
 
 After the bitstream has been generated, we can connect to the FPGA and program it. Under PROGRAM AND DEBUG, click *Open Target*. This should connect to the FPGA. If this does not happen, make sure the FPGA is turned on, and check if your [drivers are installed correctly](https://docs.amd.com/r/en-US/ug973-vivado-release-notes-install-license/Install-Cable-Drivers)
 ![img](img/open_target.png)
+
 After the hardware is detected, you can click Program Device and upload the bitstream.
+
+![img](img/vivado_implementation.png)
 
 Now your FPGA should have implemented the design that we implemented in RTL. Try if the switch turns the LED on.
 
