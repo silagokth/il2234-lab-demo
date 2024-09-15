@@ -79,7 +79,10 @@ We first need to run the Implementation to load the design into the FPGA. This w
 
 After the implementation process finishes, we must generate the *bitstream*. This contains the information that will be sent to the FPGA, which contains all the connections and settings that need to be made inside the FPGA to correctly implement our design.
 
-After the bitstream has been generated, we can connect to the FPGA and program it. Under PROGRAM AND DEBUG, click *Open Target*. This should connect to the FPGA. If this does not happen, make sure the FPGA is turned on, and check if your [drivers are installed correctly](https://docs.amd.com/r/en-US/ug973-vivado-release-notes-install-license/Install-Cable-Drivers)
+After the bitstream has been generated, we can connect to the FPGA and program it. Under PROGRAM AND DEBUG, click *Open Target*. This should connect to the FPGA. If this does not happen, make sure the FPGA is turned on, and check if your [drivers are installed correctly](https://docs.amd.com/r/en-US/ug973-vivado-release-notes-install-license/Install-Cable-Drivers). 
+
+Make sure to connect the FPGA power as specified in the [Urbana Board Reference Manual](https://www.realdigital.org/doc/496fed57c6b275735fe24c85de5718c2). Ensure the jumper is set to the correct position. 
+![img](img/Urbana.jpg)
 ![img](img/open_target.png)
 
 After the hardware is detected, you can click Program Device and upload the bitstream.
@@ -97,27 +100,29 @@ The common way to generate these types of signals is to use a clock divider. We 
 A simple way to divide the clock is to implement a counter.
 ```systemverilog
 module clock_divider #(
-    parameter int DIVIDER
+    parameter int DIVISOR
     ) (
     input  logic rst_n,
-    input  logic clock_in.
-    output logic clock_out
+    input  logic clk_in,
+    output logic clk_out
     );
 
-    # counter signal
-    logic [$clog2(DIVIDER)-1:0] counter;
+    // counter signal
+    logic [$clog2(DIVISOR)-1:0] counter;
 
-    always_ff @(posedge clock_in, negedge rst_n) begin
-        if (!rst_n) begin
-            counter <= DIVIDER;
-            clock_out <= 0;
-        end else if (counter == 0) begin
-            counter <= DIVIDER - 1;
-            clock_out <= ~clock_out;
-        end 
-            counter <= counter - 1;
-        end
-    end
+     always_ff @(posedge clk_in or negedge rst_n) begin
+       if (!rst_n) begin
+         counter <= DIVISOR;
+         clk_out <= 0;
+       end else begin
+         if (counter == 0) begin
+           counter <= DIVISOR;
+           clk_out <= ~clk_out;
+         end else begin
+           counter <= counter - 1;
+         end
+       end
+     end
 endmodule
 ```
 
@@ -125,17 +130,17 @@ Now we can connect the counter to an LED and divide by 100000000.
 ```systemverilog
 module urbana_top (
     output logic [15:0]LED,
-    input  logic [3:0]BTN,
+    input  logic [3:0]BTN, //Push buttons on the board
     input  logic CLK_100MHZ
     );
 
-    # instantiate clock divider
+    // instantiate clock divider
     clock_divider #(
-        .DIVIDER(100000000)
+        .DIVISOR(100000000)
         ) clock_divider_inst (
-        .rst_n(BTN[0]),
-        .clock_in(CLK_100MHZ),
-        .clock_out(LED[0])
+        .rst_n(~BTN[0]),
+        .clk_in(CLK_100MHZ),
+        .clk_out(LED[0])
     );
 endmodule
 ```
