@@ -35,22 +35,26 @@ For this course, we will use [RealDigital's Urbana](https://www.realdigital.org/
 The constraints file `urbana.xdc` includes, among others, the definitions of the pins and their names. For example, if you open the file, you can see that pin G1 is named SW[0], which means that it is connected to the SW0 switch on the PCB. Similarly, all other devices on the PCB are listed on the constraints file with their name and the pin to which they are connected. For us, it is important to pay attention to the name at the end of each line, as this is how we will be referring to the pins in our RTL code.
 
 ## Starting Vivado and creating a project
-To create a new project in Vivado, you can either follow these steps or clone the Git repository and refer to the Starting Vivado and Recreate the Project section![img](img/new_project.png)
-Select project type:
-![img](img/project_type.png)
+To create a new project in Vivado, you can either follow these steps or clone the Git repository and refer to the Starting Vivado and Recreate the Project section
+1. **Create a New Project**:  
+   <img src="img/new_project.png" alt="New Project" width="800"/>
 
-Add your SystemVerilog files:
-![img](img/add_file.png)
+2. **Select Project Type**:  
+   <img src="img/project_type.png" alt="Project Type" width="800"/>
 
-Add the constraint file: Be sure to include the constraint file, `urbana.xdc`.
+3. **Add Your SystemVerilog Files**:  
+   <img src="img/add_file.png" alt="Add Files" width="800"/>
 
-![img](img/add_constraint.png)
+4. **Add the Constraint File**:  
+   Be sure to include the constraint file, `urbana.xdc`.  
+   <img src="img/add_constraint.png" alt="Add Constraint" width="800"/>
 
-Select the FPGA model: Search for the FPGA model `XC7S50` and select the one shown below.
-![img](img/fpga.png)
+5. **Select the FPGA Model**:  
+   Search for the FPGA model `XC7S50` and select the one shown below.  
+   <img src="img/fpga.png" alt="FPGA Model" width="800"/>
 
-Review project summary:
-![img](img/summary.png)
+6. **Review Project Summary**:  
+   <img src="img/summary.png" alt="Project Summary" width="800"/>
 
 Once these steps are complete, your project will be set up and ready for you to implement the provided designs.
 ## Starting Vivado and recreating the project
