@@ -34,10 +34,12 @@ For this course, we will use [RealDigital's Urbana](https://www.realdigital.org/
 ### Constraints file
 The constraints file `urbana.xdc` includes, among others, the definitions of the pins and their names. For example, if you open the file, you can see that pin G1 is named SW[0], which means that it is connected to the SW0 switch on the PCB. Similarly, all other devices on the PCB are listed on the constraints file with their name and the pin to which they are connected. For us, it is important to pay attention to the name at the end of each line, as this is how we will be referring to the pins in our RTL code.
 
-[test](#starting-vivado-and-creating-a-project)
+## Starting Vivado
+You can either start a new project by following [instructions below](#creating-a-project) or clone the Git repository and recreate the provided project as shown [here](#recreating-the-project).
 
-## Starting Vivado and creating a project
-To create a new project in Vivado, you can either follow these steps or clone the Git repository and refer to the Starting Vivado and Recreate the Project section
+
+## Creating a project
+To create a new project in Vivado, you should follow these steps
 1. **Create a New Project**:  
    <img src="img/new_project.png" alt="New Project" width="800"/>
 
@@ -59,7 +61,7 @@ To create a new project in Vivado, you can either follow these steps or clone th
    <img src="img/summary.png" alt="Project Summary" width="800"/>
 
 Once these steps are complete, your project will be set up and ready for you to implement the provided designs.
-## Starting Vivado and recreating the project
+## Recreating the project
 You can recreate a project template provided in this git repository. To do that, clone the git repository in the repository of your choice and run the `rebuild.tcl` script with Vivado.
 
 ```bash
