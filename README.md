@@ -28,8 +28,33 @@ NOTE: jordi is an example here. Add your specific installation path.
 Search "environmental variables" in the start menu
 Add the Vivado path in the PATH variable for your user
 
+## Urbana development board
+For this course, we will use [RealDigital's Urbana](https://www.realdigital.org/hardware/urbana) as the FPGA development board. On the website, you can find a description of all the resources, peripherals, and extra hardware included in the development board and the Spartan7 FPGA. This includes switches, buttons, LEDs, and 7-segment displays, among others. All these devices are connected to the FPGA input/output pins as described in the [schematic](https://www.realdigital.org/downloads/064514e67fbab05a00650ce69af02486.pdf) of the development board. We will use the buttons, switches and 7-segment displays for these labs, but feel free to explore how other devices are also integrated.
+
+### Constraints file
+The constraints file `urbana.xdc` includes, among others, the definitions of the pins and their names. For example, if you open the file, you can see that pin G1 is named SW[0], which means that it is connected to the SW0 switch on the PCB. Similarly, all other devices on the PCB are listed on the constraints file with their name and the pin to which they are connected. For us, it is important to pay attention to the name at the end of each line, as this is how we will be referring to the pins in our RTL code.
+
+## Starting Vivado and creating a project
+To create a new project in Vivado, you can either follow these steps or clone the Git repository and refer to the Starting Vivado and Recreate the Project section![img](img/new_project.png)
+Select project type:
+![img](img/project_type.png)
+
+Add your SystemVerilog files:
+![img](img/add_file.png)
+
+Add the constraint file: Be sure to include the constraint file, `urbana.xdc`.
+
+![img](img/add_constraint.png)
+
+Select the FPGA model: Search for the FPGA model `XC7S50` and select the one shown below.
+![img](img/fpga.png)
+
+Review project summary:
+![img](img/summary.png)
+
+Once these steps are complete, your project will be set up and ready for you to implement the provided designs.
 ## Starting Vivado and recreating the project
-To follow the lab, you will recreate a project template provided in this git repository. To do that, clone the git repository in the repository of your choice and run the `rebuild.tcl` script with Vivado.
+You can recreate a project template provided in this git repository. To do that, clone the git repository in the repository of your choice and run the `rebuild.tcl` script with Vivado.
 
 ```bash
 git clone git@github.com:silagokth/il2234-lab-demo.git lab1
@@ -38,10 +63,7 @@ vivado -source rebuild.tcl
 ```
 This should launch Vivado, recreate the project with the correct configuration for the FPGA we will use, and load the source and constraints files. After loading your project should look similar to this, with `urbana_top.sv` and `urbana.xdc` files shown.
 ![img](img/vivado_sources.png)
-## Urbana development board
-For this course, we will use [RealDigital's Urbana](https://www.realdigital.org/hardware/urbana) as the FPGA development board. On the website, you can find a description of all the resources, peripherals, and extra hardware included in the development board and the Spartan7 FPGA. This includes switches, buttons, LEDs, and 7-segment displays, among others. All these devices are connected to the FPGA input/output pins as described in the [schematic](https://www.realdigital.org/downloads/064514e67fbab05a00650ce69af02486.pdf) of the development board. We will use the buttons, switches and 7-segment displays for these labs, but feel free to explore how other devices are also integrated.
-### Constraints file
-The constraints file `urbana.xdc` includes, among others, the definitions of the pins and their names. For example, if you open the file, you can see that pin G1 is named SW[0], which means that it is connected to the SW0 switch on the PCB. Similarly, all other devices on the PCB are listed on the constraints file with their name and the pin to which they are connected. For us, it is important to pay attention to the name at the end of each line, as this is how we will be referring to the pins in our RTL code.
+
 
 
 ## First design
