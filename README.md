@@ -34,6 +34,8 @@ For this course, we will use [RealDigital's Urbana](https://www.realdigital.org/
 ### Constraints file
 The constraints file `urbana.xdc` includes, among others, the definitions of the pins and their names. For example, if you open the file, you can see that pin G1 is named SW[0], which means that it is connected to the SW0 switch on the PCB. Similarly, all other devices on the PCB are listed on the constraints file with their name and the pin to which they are connected. For us, it is important to pay attention to the name at the end of each line, as this is how we will be referring to the pins in our RTL code.
 
+[test](#starting-vivado-and-creating-a-project)
+
 ## Starting Vivado and creating a project
 To create a new project in Vivado, you can either follow these steps or clone the Git repository and refer to the Starting Vivado and Recreate the Project section
 1. **Create a New Project**:  
