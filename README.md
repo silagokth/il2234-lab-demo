@@ -28,6 +28,17 @@ NOTE: jordi is an example here. Add your specific installation path.
 Search "environmental variables" in the start menu
 Add the Vivado path in the PATH variable for your user
 
+## Obtain License
+
+After the installation, the license manager should open automatically. If not you can open in via the vlm command (Linux). In the license manager click on obtain license and choose one of the two options. This will open the license homepage of AMD.
+![img](img/obtain_license.png)
+On this page select Vivado Basic Tier License. Afterwards it requires you to add the MAC address of your device.
+
+![img](img/license_option.png)
+
+You will receive the license file via email, which you can then add to the license manager via the load license option.
+![img](img/load_license.png)
+
 ## Urbana development board
 For this course, we will use [RealDigital's Urbana](https://www.realdigital.org/hardware/urbana) as the FPGA development board. On the website, you can find a description of all the resources, peripherals, and extra hardware included in the development board and the Spartan7 FPGA. This includes switches, buttons, LEDs, and 7-segment displays, among others. All these devices are connected to the FPGA input/output pins as described in the [schematic](https://www.realdigital.org/downloads/064514e67fbab05a00650ce69af02486.pdf) of the development board. We will use the buttons, switches and 7-segment displays for these labs, but feel free to explore how other devices are also integrated.
 
