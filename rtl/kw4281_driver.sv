@@ -6,8 +6,9 @@ module kw4281_driver #(
     input logic rst_n,
     input logic clk,
     input logic [3:0][3:0] input_bcd,
+    input logic [3:0] input_dots,
     output logic [3:0] an,
-    output logic [6:0] seg
+    output logic [7:0] seg
 );
   // We want to multiplex the 4 digits at 1kHz so first we need to divide the clock
   logic clk_1000hz;
@@ -34,10 +35,10 @@ module kw4281_driver #(
   // generate AN one-hot signal (active low)
   always_comb begin
     case (counter)
-      2'b00:   an = 4'b1110;
-      2'b01:   an = 4'b1101;
-      2'b10:   an = 4'b1011;
-      2'b11:   an = 4'b0111;
+      2'b11:   an = 4'b1110;
+      2'b10:   an = 4'b1101;
+      2'b01:   an = 4'b1011;
+      2'b00:   an = 4'b0111;
       default: an = 4'b1111;
     endcase
   end
@@ -45,6 +46,7 @@ module kw4281_driver #(
   // bcd to 7 segment decoder
   bcd27s bcd27s_0 (
       .bcd(input_bcd[counter]),
-      .seg(seg)
+      .seg(seg[6:0])
   );
+  assign seg[7] = input_dots[counter];
 endmodule
