@@ -1,4 +1,4 @@
-# Firmware compilation
+# IL2234 RISC-V project: Firmware compilation
 
 The program that is provided here and will be used for examination is ***main.c***. Make sure you have RISC-V GNU Toolchain installed in your system.
 
